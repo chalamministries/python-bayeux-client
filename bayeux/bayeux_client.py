@@ -164,7 +164,7 @@ class BayeuxClient(object):
                 if self.started:
                     self.sender.unsubscribe(id)
                     
-    def send_message(self, message, callback):
+    def send(self, message, callback):
         """send Message
 
         Args:
@@ -173,7 +173,7 @@ class BayeuxClient(object):
         """
         with self.lock:
             if self.started:
-                self.sender.send_message(message)
+                self.sender.send_message(message, callback)
 
     def _connect_cb(self, data):
         """Callback for the connect message.
