@@ -172,9 +172,7 @@ class BayeuxClient(object):
             callback: The callback to unsubscribe
         """
         with self.lock:
-            if self.is_handshook:
-                if self.started:
-                    self.sender.send_message(message, callback)
+            self.sender.send_message(message, callback)
 
     def _connect_cb(self, data):
         """Callback for the connect message.
