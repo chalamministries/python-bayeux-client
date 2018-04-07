@@ -163,6 +163,17 @@ class BayeuxClient(object):
                 self.subscriptions.remove(id)
                 if self.started:
                     self.sender.unsubscribe(id)
+                    
+    def send_message(self, message, callback):
+        """send Message
+
+        Args:
+            id: The event to unsubscribe from
+            callback: The callback to unsubscribe
+        """
+        with self.lock:
+            if self.started:
+                self.sender.send_message(message)
 
     def _connect_cb(self, data):
         """Callback for the connect message.
