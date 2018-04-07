@@ -48,6 +48,7 @@ class BayeuxClient(object):
         self.subscriptions = set()
         self.lock = RLock()
         self.oauth_header = oauth_header
+        logging.basicConfig(filename='example.log',level=logging.DEBUG)
         logging.debug("server: %s, receiver: %s, oauth header: %s", self.server, self.receiver, self.oauth_header)
         self.sender = BayeuxMessageSender(self.server, self.receiver, self.oauth_header)
         self.receiver.register(bayeux_constants.HANDSHAKE_CHANNEL,
